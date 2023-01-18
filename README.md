@@ -119,3 +119,35 @@ curl --request POST \
 
 - Escalar serviço
 `docker service scale nginx_swarm_web=3`
+
+## Kubernets
+
+- Iniciar minikube
+`minikube start`
+
+- Abrir dashboard
+`minikube dashboard`
+
+- Criar deployment
+`kubectl create deployment flask-deployment --image=rafaeljuliano/flask-hub-project:1`
+
+- Expor deployment
+`kubectl expose deployment flask-deployment --type=LoadBalancer --port=5000`
+
+- Servir com o minikube
+`minikube service flask-deployment`
+
+- Escalar serviço
+`kubectl scale deployment/flask-deployment --replicas=5`
+
+- Update de versão
+`kubectl set image deployment/flask-deployment flask-hub-project=rafaeljuliano/flask-hub-project:2`
+
+- Rollback
+`kubectl rollout undo deployment/flask-deployment`
+
+- Derrubar deployment
+`kubectl delete deployment/flask-deployment`
+
+- Kubernet com yaml
+`kubectl apply -f kubernets/flask-project.yaml`
