@@ -64,3 +64,30 @@ Material para apresentação das ferramentas
 - Se der erro dar permissão ao usuário do docker
 `sudo chown www-data: messages`
 `sudo chmod u+w messages`
+
+# Networks
+
+- Buildar imagems antes
+`docker build -t flask_api_network ./networks/flask/`
+`docker build -t mysql_api_network ./networks/mysql/`
+
+- Criar network
+`docker network create flaskNetwork`
+
+- Subir container MYSQL na network
+`docker run -d -p 3306:3306 --name mysql_api_container --rm --network flaskNetwork -e MYSQL_ALLOW_EMPTY_PASSWORD=true mysql_api_network`
+
+- Subir container flask sem network
+`docker run -d -p 5000:5000 --name flask_api_container --rm flask_api_network`
+
+- Inserir flask na network
+`docker network connect flaskNetwork flask_api_container`
+
+- CURL
+```curl
+curl --request GET \
+  --url http://localhost:5000/
+
+curl --request POST \
+  --url http://localhost:5000/inserthost
+```

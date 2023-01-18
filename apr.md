@@ -37,8 +37,8 @@ sudo chown www-data: messages
 sudo chmod u+w messages
 docker run -d -p 80:80 --name phpmessages_cont --rm -v \/home/rafael/workspace/curso-docker/curso_docker/2_volumes/messages:/var/www/html/messages phpmessages
 
-docker build -t mysql_api_network ./mysql/
-docker build -t flask_api_network ./flask/
+docker build -t mysql_api_network .networks/mysql/
+docker build -t flask_api_network .networks/flask/
 docker network create flaskNetwork
 docker run -d -p 3306:3306 --name mysql_api_container --rm --network flaskNetwork -e MYSQL_ALLOW_EMPTY_PASSWORD=true mysql_api_network
 docker run -d -p 5000:5000 --name flask_api_container --rm --network flaskNetwork flask_api_network
