@@ -91,3 +91,31 @@ curl --request GET \
 curl --request POST \
   --url http://localhost:5000/inserthost
 ```
+
+## Compose
+
+- Subir containers
+`docker-compose up ./compose`
+- Destruir containers
+
+## Docker Swarm
+
+- Criar manager e atribuir workers
+`docker swarm init --advertise-addr <ip>`
+
+- Criar serviço
+`docker  service create --name nginxswarm --replicas 3 -p 80:80 nginx`
+
+- Mostrar workers e tentar excluir container
+  
+- Remover serviço
+`docker service ls`
+`docker service rm `
+
+- Criarm yaml
+  
+- Criar deploy
+`docker stack deploy -c docker-compose.yaml nginx_swarm`
+
+- Escalar serviço
+`docker service scale nginx_swarm_web=3`

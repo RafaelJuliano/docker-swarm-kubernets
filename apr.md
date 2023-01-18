@@ -55,7 +55,18 @@ curl --request POST \
 
   SWARM 
   docker swarm init --advertise-adr ip
+  docker swarm join --token SWMTKN-1-61kax5ipzwqegzu9l3tzbi8bpo5qmrt64p4no3okga872qlhjw-6qm9fl2t6m0vdeubgx1h0aji8 192.168.0.26:2377
   docker  service create --name nginxswarm --replicas 3 -p 80:80 nginx
+
+  ```yaml
+  version: '3.3'
+  services:
+    web:
+      image: nginx
+      ports:
+        - '80:80'
+  ```
+
   docker stack deploy -c docker-compose.yaml nginx_swarm
   docker service scale nginx_swarm_web=3
 
