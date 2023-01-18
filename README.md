@@ -46,4 +46,21 @@ Material para apresentação das ferramentas
 - Publicar as tuas tagas da imagem
 [Repositório](https://hub.docker.com/repository/docker/rafaeljuliano/node-express/general)
 `docker push rafaeljuliano/node-express:dev-14 && docker push rafaeljuliano/node-express:dev-16`
-```
+
+## Volumes
+
+- Deixar build pronto
+`docker build -t phpmessages ./volumes/`
+
+- Rodar dois container com o mesmo volume
+[Localhost:80](http://localhost:80)
+[Localhost:8080](http://localhost:8080)
+`docker run -d -p 80:80 --name phpmessages1 --rm -v phpvolume:/var/www/html/messages phpmessages`
+`docker run -d -p 8080:80 --name phpmessages2 --rm -v phpvolume:/var/www/html/messages phpmessages`
+
+- Ler caminho da pasta e rodar no modo bind
+`readlink -f ./volumes/messages`
+
+- Se der erro dar permissão ao usuário do docker
+`sudo chown www-data: messages`
+`sudo chmod u+w messages`
